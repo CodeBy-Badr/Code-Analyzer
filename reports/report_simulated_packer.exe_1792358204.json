@@ -1,0 +1,42 @@
+{
+  "file_path": "C:\\Users\\hp\\Desktop\\Code-Analyzer\\python_orchestrator\\..\\samples\\simulated_packer.exe",
+  "file_size": 218558,
+  "is_pe": true,
+  "is_elf": false,
+  "entropy": 7.2816135286842085,
+  "is_packed": true,
+  "verdict": "CLEAN",
+  "confidence": 95.83,
+  "threat_score": 25,
+  "iocs": {
+    "urls": [],
+    "ip_addresses": [],
+    "onion_domains": [],
+    "suspicious_commands": [],
+    "suspicious_apis": [
+      "VirtualProtect"
+    ],
+    "registry_keys": [],
+    "ransomware_keywords": [
+      "Encrypted blob verification: 0x%02X"
+    ]
+  },
+  "rule_matches": [
+    {
+      "rule_name": "Packed_Or_Encrypted_Binary",
+      "category": "PACKER",
+      "mitre": "T1027",
+      "severity": 3,
+      "description": "File exhibits abnormally high Shannon entropy (>7.15) indicating packing, compression, or encryption."
+    }
+  ],
+  "analysis_duration_ms": 60.06,
+  "forensics": {
+    "summary": "Binary simulated_packer.exe displays normal structural characteristics (Entropy: 7.28) with standard operating system APIs and zero high-risk execution signatures. No persistent threat patterns were detected.",
+    "attack_vectors": [],
+    "mitre_matrix": [],
+    "remediation_steps": [
+      "No immediate defensive action required; file is deemed benign."
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "file_path": "C:\\Users\\hp\\Desktop\\Code-Analyzer\\python_orchestrator\\..\\samples\\clean_utility.exe",
+  "file_size": 87486,
+  "is_pe": true,
+  "is_elf": false,
+  "entropy": 5.223171500918746,
+  "is_packed": false,
+  "verdict": "CLEAN",
+  "confidence": 95.83,
+  "threat_score": 0,
+  "iocs": {
+    "urls": [],
+    "ip_addresses": [],
+    "onion_domains": [],
+    "suspicious_commands": [],
+    "suspicious_apis": [
+      "VirtualProtect"
+    ],
+    "registry_keys": [],
+    "ransomware_keywords": []
+  },
+  "rule_matches": [],
+  "analysis_duration_ms": 98.63,
+  "forensics": {
+    "summary": "Binary clean_utility.exe displays normal structural characteristics (Entropy: 5.22) with standard operating system APIs and zero high-risk execution signatures. No persistent threat patterns were detected.",
+    "attack_vectors": [],
+    "mitre_matrix": [],
+    "remediation_steps": [
+      "No immediate defensive action required; file is deemed benign."
+    ]
+  }
+}
